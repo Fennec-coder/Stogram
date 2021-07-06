@@ -25,6 +25,10 @@
       <!-- Navbar Links -->
       <ul id="menu">
         <li><a href="/">Home</a></li>
+        <%if user_signed_in? %>
+          <li><%= link_to 'Profile', user_root_path %></li>
+          <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
+        <%end%>
       </ul>
     </div>
   </nav>
@@ -40,15 +44,23 @@
   <div class="overlay-menu">
     <ul id="menu">
       <li><a href="/">Home</a></li>
+      <%if user_signed_in? %>
+        <li><%= link_to 'Profile', user_root_path %></li>
+      <%end%>
     </ul>
   </div>
+
 
   <div class="content">
     <%= yield %>
   </div>
 
-  <script>
+  <!--
+  TODO: put in a separate file, the script is located here because of early launch,
+   when described in the head, it does not work.
+  -->
 
+  <script>
       let menuIcon = document.querySelector('.menuIcon');
       let nav = document.querySelector('.overlay-menu');
 
@@ -75,6 +87,8 @@
       });
 
   </script>
+
+
 
   </body>
 </html>

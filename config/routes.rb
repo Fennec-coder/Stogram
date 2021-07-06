@@ -4,5 +4,6 @@ Rails.application.routes.draw do
 
   root 'public#home'
 
-  get 'user/profile', as: 'user_root'
+  get 'users/profile', as: 'user_root'
+
 end
