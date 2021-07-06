@@ -8,9 +8,73 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </head>
 
   <body>
+
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <nav id="navbar" class="">
+    <div class="nav-wrapper">
+      <!-- Navbar Logo -->
+      <div class="logo">
+        <!-- Logo Placeholder for Inlustration -->
+        <a href="/"><i class="fa fa-angellist"></i> MyFeed</a>
+      </div>
+
+      <!-- Navbar Links -->
+      <ul id="menu">
+        <li><a href="/">Home</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <!-- Menu Icon -->
+  <div class="menuIcon">
+    <span class="icon icon-bars"></span>
+    <span class="icon icon-bars overlay"></span>
+  </div>
+
+
+  <div class="overlay-menu">
+    <ul id="menu">
+      <li><a href="/">Home</a></li>
+    </ul>
+  </div>
+
+  <div class="content">
     <%= yield %>
+  </div>
+
+  <script>
+
+      let menuIcon = document.querySelector('.menuIcon');
+      let nav = document.querySelector('.overlay-menu');
+
+      menuIcon.addEventListener('click', () => {
+          if (nav.style.transform !== 'translateX(0%)') {
+              nav.style.transform = 'translateX(0%)';
+              nav.style.transition = 'transform 0.2s ease-out';
+          } else {
+              nav.style.transform = 'translateX(-100%)';
+              nav.style.transition = 'transform 0.2s ease-out';
+          }
+      });
+
+
+      // Toggle Menu Icon ========================================
+      let toggleIcon = document.querySelector('.menuIcon');
+
+      toggleIcon.addEventListener('click', () => {
+          if (toggleIcon.className !== 'menuIcon toggle') {
+              toggleIcon.className += ' toggle';
+          } else {
+              toggleIcon.className = 'menuIcon';
+          }
+      });
+
+  </script>
+
   </body>
 </html>
