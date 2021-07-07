@@ -1,7 +1,8 @@
 <h1>Hello there</h1>
-<p>Sign in or register</p>
+<% unless user_signed_in? %>
+  <p>Sign in or register</p>
+<% end %>
 <br>
-<%= link_to '<button>Sign up</button>'.html_safe, new_user_registration_path%>
-<%= link_to '<button>Sign in</button>'.html_safe, new_user_session_path%>
+<p>#in general, can be done just make a list of random pictures, see what type is. </p>
 
 
