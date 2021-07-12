@@ -1,0 +1,10 @@
+<h2>Create new one</h2>
+<%= form_for [@user, Post.new], html: { multipart: true } do |f| %>
+  <br>
+  <div class="form-group">
+    <%= f.label :description %><br />
+    <%= f.text_area :description, class: "form-control"%>
+  </div><br />
+  <%= f.submit "Sent", class: "btn btn-success"%>
+
+<% end %>

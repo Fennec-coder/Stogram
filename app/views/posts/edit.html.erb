@@ -1,0 +1,27 @@
+<h1>Editing post</h1>
+
+<%= form_with(model: [@user, @post], local: true) do |form|%>
+  <% if @post.errors.any?%>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being save</h2>
+
+      <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :description %> <br>
+    <%= form.text_area :description%>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Show', user_post_path(@post.user_id, @post) %>
+<%= link_to 'Back', user_posts_path(@post.user_id) %>

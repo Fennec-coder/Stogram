@@ -6,4 +6,10 @@ Rails.application.routes.draw do
 
   get 'users/profile', as: 'user_root'
 
+  resources :posts
+  # get 'posts' => 'posts#index', as: :posts
+
+  resources :users, only: [:new, :create, :edit] do
+    resources :posts
+  end
 end
