@@ -1,14 +1,14 @@
-<h1>Hello there</h1>
 <% unless user_signed_in? %>
+  <h1>Hello there</h1>
   <p>Sign in or register</p>
 <% end %>
+<br>
 
-
-<% for i in @posts.shuffle do %>
-  <h6>id : <%= i.id %></h6>
+<% for post in @posts.shuffle do %>
+  <%= image_tag post.image_url %>
   <br>
   <h6>description</h6>
-  <p> <%= i.description %> </p>
+  <p> <%= post.description %> </p>
   <br>
 <% end %>
 
