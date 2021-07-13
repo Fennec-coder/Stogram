@@ -27,7 +27,7 @@ class PostsController < ApplicationController
 
   def update
     post = Post.find(params[:id])
-    post.update(params.require(:post).permit(:description))
+    post.update(post_params)
     redirect_to post, flash: {success: 'Post was updated'}
   end
 
@@ -36,5 +36,9 @@ class PostsController < ApplicationController
     @post.destroy
 
     redirect_to :user_root
+  end
+
+  def post_params
+    params.require(:post).permit(:description, :image)
   end
 end

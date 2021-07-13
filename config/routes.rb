@@ -4,12 +4,14 @@ Rails.application.routes.draw do
 
   root 'public#home'
 
-  get 'users/profile', as: 'user_root'
-
   resources :posts
-  # get 'posts' => 'posts#index', as: :posts
 
-  resources :users, only: [:new, :create, :edit] do
+  resources :users, only: [:new, :create, :edit, :show] do
     resources :posts
+
+    resources :followers, only: :index
+    resources :followings, only: :index
   end
+
+  resources :follows, only: [:create, :destroy, :index]
 end

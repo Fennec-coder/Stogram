@@ -1,6 +1,9 @@
 class Post < ApplicationRecord
   belongs_to :user
   validates :description, presence: true, length: { maximum: 100 }
+
+  include ImageUploader::Attachment(:image) # adds an `image` virtual attribute
+
   # validates :image, presence: true
   # has_many :likes
   # has_many :comments

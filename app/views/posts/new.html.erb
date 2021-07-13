@@ -1,10 +1,14 @@
 <h2>Create new one</h2>
 <%= form_for [@user, Post.new], html: { multipart: true } do |f| %>
+  <div class="field">
+    <%= f.hidden_field :image, value: @post.cached_image_data %>
+    <%= f.file_field :image %>
+  </div>
   <br>
   <div class="form-group">
-    <%= f.label :description %><br />
+    <%= f.label :description %>
     <%= f.text_area :description, class: "form-control"%>
-  </div><br />
+  </div>
   <%= f.submit "Sent", class: "btn btn-success"%>
 
 <% end %>

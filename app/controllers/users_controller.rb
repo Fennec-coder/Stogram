@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:profile]
+  before_action :authenticate_user!, only: [:show]
 
-  def profile
-    @user = current_user
-    @posts = Post.select{|post| post.user_id == @user.id}
+  def show
+    @user = User.find(params[:id])
+    @posts = Post.select { |post| post.user_id == @user.id }
+    @followers = Follow.select { |follower| follower.following_id == @user.id }
   end
 
 end
