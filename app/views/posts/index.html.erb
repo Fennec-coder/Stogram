@@ -5,6 +5,8 @@
 <tbody>
 <% @posts.each do |post| %>
     <tr>
+      <td><%= image_tag post.image_url %></td>
+
       <td><%= post.description %></td>
     </tr>
 <%end%>

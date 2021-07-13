@@ -1,7 +1,7 @@
 <h1><%=@user.username %> </h1>
 <h4><%=@user.name %></h4>
 <% unless @user.bio.nil? %>
-  <h5>bio:</h5><dr>
+  <h5>bio:</h5><br>
   <h5><%=@user.bio%></h5>
 <% end %>
 <br>
@@ -11,6 +11,12 @@
 <%=link_to '<button>create post</button>'.html_safe, new_user_post_path(@user, @post) %>
 <br>
 <br>
+
+<% if current_user.present? && current_user != @user %>
+  <%= link_to("Follow", follows_path(following_id: @user.id), method: :post) %>
+<% end%>
+<br>
+
 <%unless @posts.empty? %>
   <h3>your posts:</h3>
   <br>
@@ -18,6 +24,8 @@
 <tbody>
 <% @posts.each do |post| %>
   <tr>
+    <td><%= image_tag post.image_url %></td>
+    <br>
     <td><%= post.description %></td>
     <br>
     <td><%= link_to 'Show', user_post_path(@user,post) %></td>
