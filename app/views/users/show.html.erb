@@ -5,6 +5,10 @@
   <h5><%=@user.bio%></h5>
 <% end %>
 
+<% unless @followers.nil? %>
+  <h5>subscribers <%=@followers.size%></h5>
+<% end %>
+
 <%=link_to '<button>Edit profile</button>'.html_safe, edit_user_registration_path if @user.id == current_user.id%>
 
 <%=link_to '<button>Create post</button>'.html_safe, new_user_post_path(@user, @post) if @user.id == current_user.id %>

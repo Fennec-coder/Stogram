@@ -1,9 +1,9 @@
-<h1>Followings</h1>
+<h1>Followings of <%= @user.username %></h1>
 <br>
 <ul>
-    <% @followings.each do |following| %>
-        <li>
-            <%= link_to(following.name, user_path(following)) %>
-        </li>
+<% @followings.each do |following| %>
+    <li>
+        <%= link_to(following.username, user_path(following)) %>
+    </li>
 <%end%>
 </ul>

@@ -18,4 +18,13 @@ class FollowsController < ApplicationController
 
     redirect_to user_followings_path(current_user)
   end
+
+  # def index
+  #   follower_user = current_user
+  #   following_user = User.find(params[:following_id])
+  #
+  #   Follow.where(follower: following_user, following: follower_user).all
+  #
+  #   redirect_to user_followings_path(current_user)
+  # end
 end
