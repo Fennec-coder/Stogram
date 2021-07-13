@@ -11,5 +11,8 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create, :edit] do
     resources :posts
+
+    resources :followers, only: :index
+    resources :followings, only: :index
   end
 end
