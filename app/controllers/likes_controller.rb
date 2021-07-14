@@ -17,4 +17,11 @@ class LikesController < ApplicationController
     @post = Post.find(params[:post_id])
     redirect_to user_post_path(current_user, @post)
   end
+
+  def index
+    likes = Like.where(post_id: params[:post_id])
+    users_ids_who_liked = likes.map(&:user_id)
+
+    @users = User.select { |user| users_ids_who_liked.include? user.id }
+  end
 end

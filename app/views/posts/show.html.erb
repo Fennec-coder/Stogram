@@ -1,8 +1,10 @@
 <h6>id : <%= @post.id %></h6>
-<%= image_tag @post.image_url %>
+<%= image_tag @post.image_url, :width => 350 %>
 <br>
 <h6>description</h6>
 <p> <%= @post.description %> </p>
+
+<%= link_to("likes #{Like.select(post_id: @post.id).size}", post_likes_path(post_id: @post.id)) %>
 
 <h2> All comments </h2>
 

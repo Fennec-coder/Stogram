@@ -5,7 +5,7 @@
 <br>
 
 <% for post in @posts.shuffle do %>
-  <%= image_tag post.image_url %>
+  <%= image_tag post.image_url, :width => 350 %>
   <br>
   <h6>description</h6>
   <p> <%= post.description %> </p>
