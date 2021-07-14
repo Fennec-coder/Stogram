@@ -1,0 +1,9 @@
+<h1>Users who liked</h1>
+<br>
+<ul>
+  <% @users.each do |following| %>
+    <li>
+      <%= link_to(following.username, user_path(following)) %>
+    </li>
+  <%end%>
+</ul>

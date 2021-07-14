@@ -7,6 +7,7 @@ class User < ApplicationRecord
   EMAIL_FORMAT = /\A[^@]+@([^@\.]+\.)+[^@\.]+\z/
 
   has_many :posts, dependent: :delete_all
+  has_many :likes, dependent: :delete_all
 
   validates :email, presence: true, uniqueness: true
   validates :email, format: { with: EMAIL_FORMAT, message: 'invalid email' }
