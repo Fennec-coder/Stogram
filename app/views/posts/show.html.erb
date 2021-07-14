@@ -1,6 +1,33 @@
 <h6>id : <%= @post.id %></h6>
-<br>
 <%= image_tag @post.image_url %>
 <br>
 <h6>description</h6>
 <p> <%= @post.description %> </p>
+
+<h2> All comments </h2>
+
+<% @post.comments.each do |comment| %>
+  <tr>
+    <td><%= User.find(comment.user_id).username %></td> said:
+    <td><%= comment.body %></td>
+    <br>
+    <% if current_user.present? && current_user.id == comment.user_id %>
+      <%= link_to("Delete", post_comment_path(post_id: @post.id, comment_id: comment.id), method: :delete) %>
+    <%end%>
+    <br>
+  </tr>
+<%end%>
+
+<% if user_signed_in? %>
+  <%= form_for([@post, @post.comments.build]) do |form|%>
+
+    <%= current_user.name %>, your comment?
+    <div class="field">
+      <%= form.text_area(:body) %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  <% end %>
+<% end %>
