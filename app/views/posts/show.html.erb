@@ -19,6 +19,21 @@
 <%end%>
 
 <% if user_signed_in? %>
+
+  <% if Like.select(user_id: current_user.id, post_id: @post.id).empty? %>
+
+  <%= link_to("<button>Like it!</button>".html_safe,
+              post_likes_path(user_id: current_user.id,
+                              post_id: @post.id),
+              method: :create) %>
+
+  <% else %>
+    <%= link_to("<button>Don't like it anymore!</button>".html_safe,
+                post_like_path(user_id: current_user.id,
+                                   post_id: @post.id),
+                   method: :delete)%>
+  <% end %>
+    <br>
   <%= form_for([@post, @post.comments.build]) do |form|%>
 
     <%= current_user.name %>, your comment?
