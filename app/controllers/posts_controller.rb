@@ -35,8 +35,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
 
-    # TODO: just reload the page then the posts on the user page are refreshed
-    # render user_root
+    redirect_to user_path(current_user)
   end
 
   def post_params
