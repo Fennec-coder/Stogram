@@ -12,7 +12,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(params.require(:post).permit(:description))
+    @post = Post.new(params.require(:post).permit(:description, :image))
     @post.user_id = current_user.id if user_signed_in?
     if @post.save
       redirect_to @post, flash: {success: 'Post was added'}
@@ -35,7 +35,8 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
 
-    redirect_to :user_root
+    # TODO: just reload the page then the posts on the user page are refreshed
+    # render user_root
   end
 
   def post_params

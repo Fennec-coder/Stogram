@@ -14,4 +14,9 @@ Rails.application.routes.draw do
   end
 
   resources :follows, only: [:create, :destroy, :index]
+
+  resources :posts do
+    resources :comments, only: [:create, :destroy]
+  end
+
 end

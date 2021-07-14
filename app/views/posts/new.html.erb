@@ -1,5 +1,5 @@
 <h2>Create new one</h2>
-<%= form_for [@user, Post.new], html: { multipart: true } do |f| %>
+<%= form_for [@user, @post], html: { multipart: true } do |f| %>
   <div class="field">
     <%= f.hidden_field :image, value: @post.cached_image_data %>
     <%= f.file_field :image %>
