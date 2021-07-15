@@ -1,7 +1,12 @@
 class ImageUploader < Shrine
   plugin :default_url
+  plugin :validation_helpers
 
   Attacher.default_url do |**options|
     "/placeholders/frog.gif"
+  end
+
+  Attacher.validate do
+    validate_extension %w[jpeg png gif]
   end
 end
