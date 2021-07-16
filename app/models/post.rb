@@ -1,6 +1,8 @@
 class Post < ApplicationRecord
   belongs_to :user
-  validates :description, presence: true, length: { maximum: 100 }
+  validates :description, length: { maximum: 100 }
+  validates :image_data, presence: true
+
   has_many :comments, dependent: :delete_all
   has_many :likes, dependent: :delete_all
 
