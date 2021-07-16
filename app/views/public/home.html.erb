@@ -4,11 +4,25 @@
 <% end %>
 <br>
 
-<% for post in @posts.shuffle do %>
+<% for post in @selected_posts do %>
   <%= image_tag post.image_url, :width => 350 %>
   <br>
   <h6>description</h6>
   <p> <%= post.description %> </p>
+  <td><%= link_to 'Show', user_post_path(post.user_id, post) %></td>
+  <br>
+  <br>
+<% end if user_signed_in? && @user.followings.any?%>
+
+<h1>maybe something new</h1>
+<br>
+<% for post in @new_posts do %>
+  <%= image_tag post.image_url, :width => 350 %>
+  <br>
+  <h6>description</h6>
+  <p> <%= post.description %> </p>
+  <td><%= link_to 'Show', user_post_path(post.user_id, post) %></td>
+  <br>
   <br>
 <% end %>
 
