@@ -2,6 +2,11 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.3'
+# will load new rubyzip version
+gem 'rubyzip', '>= 1.0.0'
+
+# will load compatibility for old rubyzip API.
+gem 'zip-zip'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4'
