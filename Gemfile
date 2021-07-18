@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.3'
 # will load new rubyzip version
-gem 'rubyzip', '>= 1.0.0'
+gem 'rubyzip', '> 2.3.0'
 
 # will load compatibility for old rubyzip API.
 gem 'zip-zip'
@@ -39,7 +39,7 @@ gem 'devise'
 # Gem for working with images
 gem "shrine", "~> 3.0"
 
-gem 'factory_bot'
+gem "factory_bot_rails"
 
 group :development, :test do
   gem 'rspec-rails', '~> 5.0.0'
