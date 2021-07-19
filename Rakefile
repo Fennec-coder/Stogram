@@ -4,3 +4,9 @@
 require_relative "config/application"
 
 Rails.application.load_tasks
+
+task "default" => "spec_and_change_seed"
+
+task "spec" do
+  sh "rspec spec/my_spec.rb"
+end

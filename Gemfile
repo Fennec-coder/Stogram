@@ -42,6 +42,10 @@ gem "shrine", "~> 3.0"
 gem "factory_bot_rails"
 
 group :development, :test do
+  gem 'factory_bot_rails'
+end
+
+group :development, :test do
   gem 'rspec-rails', '~> 5.0.0'
 end
 

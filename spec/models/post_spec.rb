@@ -1,15 +1,9 @@
 require 'rails_helper'
-require 'ffaker'
 
-FactoryBot.define do
-  factory :post do
-    association :user
+RSpec.describe Post, type: :model do
 
-    description { FFaker::Lorem.sentence }
-    image { Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/really_pixel.png')) }
+  it { is_expected.to belong_to(:user) }
 
-    trait(:with_invalid_image) do
-      image { Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/really_pixel.txt')) }
-    end
-  end
+  it { is_expected.to validate_length_of(:description).is_at_most(100) }
+
 end
