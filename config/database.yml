@@ -27,8 +27,8 @@ default: &default
   password: admin
   port: 5432
 
-  #connect to heroku
-  url: <%= ENV["DATABASE_URL"] %>
+  # connect to heroku
+  # url: <%= ENV["DATABASE_URL"] %>
 
 development:
   <<: *default
