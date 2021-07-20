@@ -39,8 +39,7 @@ gem 'devise'
 # Gem for working with images
 gem "shrine", "~> 3.0"
 
-gem "factory_bot_rails"
-
+# Gems for working with tests
 group :development, :test do
   gem 'factory_bot_rails'
 end
