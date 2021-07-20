@@ -7,10 +7,10 @@ FactoryBot.define do
     association :user
 
     description { FFaker::Lorem.sentence }
-    image { Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/pixel.png')) }
+    image { Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/really_pixel.png')) }
 
     trait(:with_invalid_image) do
-      image { Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/text.txt')) }
+      image { Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/really_pixel.txt')) }
     end
   end
 end
