@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2021_07_14_081007) do
 
   create_table "follows", force: :cascade do |t|
     t.integer "follower_id"
-    t.integer "following_id"
+    t.integer "being_followed_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 2021_07_14_081007) do
   end
 
   add_foreign_key "comments", "posts"
+  add_foreign_key "follows", "users", column: "being_followed_id"
   add_foreign_key "follows", "users", column: "follower_id"
-  add_foreign_key "follows", "users", column: "following_id"
   add_foreign_key "posts", "users"
 end
