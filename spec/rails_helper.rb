@@ -69,4 +69,6 @@ RSpec.configure do |config|
     end
   end
 
+  config.include Warden::Test::Helpers
+  config.include Devise::Test::ControllerHelpers, type: :controller
 end
