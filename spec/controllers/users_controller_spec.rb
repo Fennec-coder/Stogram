@@ -7,14 +7,28 @@ RSpec.describe UsersController, type: :controller do
 
   before { sign_in user }
 
+  context 'valid factory' do
+    it 'has a valid factory' do
+      expect(build(:user)).to be_valid
+    end
+  end
+
   describe '#show' do
     let(:params) { { id: user.id } }
     subject { get :show, params: params }
 
-    # user profile to user ratio
-    it 'assigns @user' do
+    it 'should correlate user and user page' do
       subject
       expect(assigns(:user)).to eq(user)
+    end
+
+    context 'see another users page' do
+      let!(:user) { create :user }
+
+      it 'should correlate user and user page' do
+        subject
+        expect(assigns(:user)).to eq(user)
+      end
     end
 
     it { is_expected.to render_template(:show) }
