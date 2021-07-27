@@ -17,7 +17,7 @@ RSpec.describe UsersController, type: :controller do
     let(:params) { { id: user.id } }
     subject { get :show, params: params }
 
-    it 'should correlate user and user page' do
+    it 'assigns @user' do
       subject
       expect(assigns(:user)).to eq(user)
     end
@@ -25,7 +25,7 @@ RSpec.describe UsersController, type: :controller do
     context 'see another users page' do
       let!(:user) { create :user }
 
-      it 'should correlate user and user page' do
+      it 'assigns @user' do
         subject
         expect(assigns(:user)).to eq(user)
       end
