@@ -4,12 +4,8 @@ RSpec.describe Post, type: :model do
   it { is_expected.to belong_to(:user) }
 
   it { is_expected.to have_many(:comments) }
-  # TODO: add check for cascading delete "comments"
-  # it { is_expected.to delegate_method(:delete_all).to(:comments) }
 
   it { is_expected.to have_many(:likes) }
-  # TODO: add check for cascading delete "likes"
-  # it { is_expected.to delegate_method(:delete_all).to(:likes) }
 
   describe 'validations' do
     it { should validate_presence_of(:description) }

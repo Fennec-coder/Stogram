@@ -19,8 +19,6 @@ RSpec.describe User, type: :model do
 
   describe 'validations' do
     it { should validate_presence_of(:email) }
-    # TODO: add check for uniqueness of emails
-    # it { should validate_uniqueness_of(:email).scoped_to(:id) }
   end
 
 end
