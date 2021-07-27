@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'capybara/rails'
+require 'database_cleaner/active_record'
 
 RSpec.describe CommentsController, type: :controller do
   let(:user) { create :user }
@@ -41,3 +42,4 @@ RSpec.describe CommentsController, type: :controller do
     end
   end
 end
+DatabaseCleaner.clean

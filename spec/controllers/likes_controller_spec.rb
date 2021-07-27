@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'capybara/rails'
+require 'database_cleaner/active_record'
 
 RSpec.describe LikesController, type: :controller do
   let(:user) { create :user }
@@ -58,3 +59,4 @@ RSpec.describe LikesController, type: :controller do
     end
   end
 end
+DatabaseCleaner.clean

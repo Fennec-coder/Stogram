@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'capybara/rails'
+require 'database_cleaner/active_record'
 
 RSpec.describe FollowersController, type: :controller do
   let(:follower) { create :user }
@@ -21,3 +22,4 @@ RSpec.describe FollowersController, type: :controller do
     it { is_expected.to render_template('index') }
   end
 end
+DatabaseCleaner.clean
