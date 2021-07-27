@@ -1,50 +1,28 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>MYFEED</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>MYFEED</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-  </head>
+</head>
 
-  <body>
+<body>
 
-  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  <nav id="navbar" class="">
-    <div class="nav-wrapper">
-      <!-- Navbar Logo -->
-      <div class="logo">
-        <!-- Logo Placeholder for Inlustration -->
-        <a href="/"><i class="fa fa-angellist"></i> MyFeed</a>
-      </div>
-
-      <!-- Navbar Links -->
-      <ul id="menu">
-        <li><a href="/">Home</a></li>
-        <%if user_signed_in? %>
-          <li><%= link_to 'Profile', user_path(current_user) %></li>
-          <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
-        <%else %>
-          <li><%= link_to 'Sign in', new_user_session_path%></li>
-          <li><%= link_to 'Sign up', new_user_registration_path %></li>
-        <%end%>
-      </ul>
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<nav id="navbar" class="">
+  <div class="nav-wrapper">
+    <!-- Navbar Logo -->
+    <div class="logo">
+      <!-- Logo Placeholder for Inlustration -->
+      <a href="/"><i class="fa fa-angellist"></i> MyFeed</a>
     </div>
-  </nav>
 
-
-  <!-- Menu Icon -->
-  <div class="menuIcon">
-    <span class="icon icon-bars"></span>
-    <span class="icon icon-bars overlay"></span>
-  </div>
-
-
-  <div class="overlay-menu">
+    <!-- Navbar Links -->
     <ul id="menu">
       <li><a href="/">Home</a></li>
       <%if user_signed_in? %>
@@ -56,11 +34,11 @@
       <%end%>
     </ul>
   </div>
+</nav>
 
+<div class="content">
+  <%= yield %>
+</div>
 
-  <div class="content">
-    <%= yield %>
-  </div>
-
-  </body>
+</body>
 </html>

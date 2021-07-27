@@ -11,6 +11,8 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true
   validates :email, format: { with: EMAIL_FORMAT, message: 'invalid email' }
+  validates :username, presence: true
+  validates :name, presence: true
 
   has_many :follower_follows, foreign_key: :being_followed_id, class_name: "Follow"
   has_many :followers, through: :follower_follows, source: :follower
