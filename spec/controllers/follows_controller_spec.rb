@@ -22,7 +22,7 @@ RSpec.describe FollowsController, type: :controller do
   describe '#destroy' do
     let!(:being_followed) { create :user }
     let!(:follow) { create :follow, follower: user, being_followed: being_followed }
-    let(:params) { { being_followed_id: being_followed.id } }
+    let(:params) { { id: being_followed.id } }
 
     subject { process :destroy, method: :delete, params: params }
 
