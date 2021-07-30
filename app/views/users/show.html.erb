@@ -15,10 +15,10 @@
 
 
 <% if current_user.present? && current_user != @user %>
-  <% if (Follow.where(follower: current_user, following: @user.id).take == nil) %>
-    <%= link_to("<button>Follow</button>".html_safe, follows_path(following_id: @user.id), method: :post) %>
+  <% if (Follow.where(follower: current_user, being_followed: @user.id).take == nil) %>
+    <%= link_to("<button>Follow</button>".html_safe, follows_path(being_followed_id: @user.id), method: :post) %>
   <%else%>
-    <%= link_to("<button>Unfollow</button>".html_safe, follow_path(following_id: @user.id), method: :delete) %>
+    <%= link_to("<button>Unfollow</button>".html_safe, follow_path(being_followed_id: @user.id), method: :delete) %>
   <%end%>
 <% end%>
 

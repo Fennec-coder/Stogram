@@ -3,20 +3,20 @@ class FollowsController < ApplicationController
 
   def create
     follower_user = current_user
-    following_user = User.find(params[:following_id])
+    following_user = User.find(params[:being_followed_id])
 
-    Follow.create(follower: follower_user, following: following_user)
+    Follow.create(follower: follower_user, being_followed: following_user)
 
     redirect_to user_followings_path(current_user)
   end
+
 
   def destroy
     follower_user = current_user
-    following_user = User.find(params[:following_id])
+    following_user = User.find(params[:id])
 
-    Follow.where(follower: follower_user, following: following_user).destroy_all
+    Follow.where(follower: follower_user, being_followed: following_user).destroy_all
 
     redirect_to user_followings_path(current_user)
   end
-
 end

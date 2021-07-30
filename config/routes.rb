@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resources :followings, only: :index
   end
 
-  resources :follows, only: [:create, :destroy, :index]
+  resources :follows, only: [:create, :destroy]
 
   resources :posts do
     resources :comments, only: [:create, :destroy]
