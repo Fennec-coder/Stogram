@@ -1,7 +1,6 @@
 <h1>Editing post</h1>
 
 <%= form_with(model: [@user, @post], local: true) do |form|%>
-  <%= render "devise/shared/error_messages", resource: resource %>
   <% if @post.errors.any?%>
     <div id="error_explanation">
       <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being save</h2>

@@ -13,12 +13,13 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(params.require(:post).permit(:description, :image))
+    @post = Post.new(post_params)
     @post.user_id = current_user.id if user_signed_in?
     if @post.save
-      redirect_to @post, flash: {success: 'Post was added'}
+      redirect_to @post, flash: { success: 'Post was added' }
     else
-      render :new, flash: {alert: 'Some error occured'}
+      flash[:order_errors] = @post.errors.full_messages
+      render :new, flash: { alert: 'Some error occured' }
     end
   end
 
@@ -29,7 +30,7 @@ class PostsController < ApplicationController
   def update
     post = Post.find(params[:id])
     post.update(post_params)
-    redirect_to post, flash: {success: 'Post was updated'}
+    redirect_to post, flash: { success: 'Post was updated' }
   end
 
   def destroy
