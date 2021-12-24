@@ -5,8 +5,6 @@
 <h6>description</h6>
 <p> <%= @post.description %> </p>
 
-<%= link_to("likes #{Like.where(post_id: @post.id).size}", post_likes_path(post_id: @post.id)) %>
-
 <h2> All comments </h2>
 
 <% @post.comments.each do |comment| %>
@@ -25,17 +23,18 @@
 
   <% if Like.where(user_id: current_user.id, post_id: @post.id).empty? %>
 
-  <%= link_to("<button>Like it!</button>".html_safe,
+  <%= link_to('<i class="fa fa-heart-o" aria-hidden="true"></i>'.html_safe,
               post_likes_path(user_id: current_user.id,
                               post_id: @post.id),
               method: :create) %>
 
   <% else %>
-    <%= link_to("<button>Don't like it anymore!</button>".html_safe,
+    <%= link_to('<i class="fa fa-heart" aria-hidden="true"></i>'.html_safe,
                 post_like_path(user_id: current_user.id,
                                    post_id: @post.id),
                    method: :delete)%>
   <% end %>
+  <%= link_to("#{@post.likes.size}", post_likes_path(post_id: @post.id)) %>
     <br>
   <%= form_for([@post, @post.comments.build]) do |form|%>
 

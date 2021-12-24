@@ -2,12 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-.img-circular{
+#img-circular{
   object-fit:cover;
   width: 400px;
   height: 400px;
-  background-size: cover;
-  border-radius: 100px;
   -webkit-border-radius: 200px;
   -moz-border-radius: 100px;
 }
