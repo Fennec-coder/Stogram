@@ -5,24 +5,25 @@
 <br>
 
 <% @selected_posts.each { |post| %>
-<%=  image_tag post.image_url, :width => 350 %>
-<br>
-<h6>description</h6>
-<p> <%=  post.description  %> </p>
-<td><%=  link_to 'Show', user_post_path(post.user_id, post)  %></td>
-<br>
-<br>
-<%  } if user_signed_in? && @user.followers.any?%>
+  <%= link_to (image_tag post.image_url, :id=> 'square-post-medium'), user_post_path(post.user_id, post) %>
+  <br> <br>
+<%  } if user_signed_in? && current_user.followers.any?%>
 
 <h1>maybe something new</h1>
 <br>
 <% @new_posts.each { |post| %>
-<%=  image_tag post.image_url, :width => 350 %>
-<br>
-<h6>description</h6>
-<p> <%=  post.description  %> </p>
-<td><%=  link_to 'Show', user_post_path(post.user_id, post)  %></td>
-<br>
-<br>
+  <%=  link_to (image_tag post.image_url, :id=> 'square-post-medium'), user_post_path(post.user_id, post) %>
+  <p> <%=  post.likes.size  %> </p>
+  <% if user_signed_in? %>
+
+    <% if Like.where(user_id: current_user.id, post_id: post.id).empty? %>
+
+      <%= '<i class="fa fa-heart-o" aria-hidden="true"></i>'.html_safe %>
+
+    <% else %>
+      <%= '<i class="fa fa-heart" aria-hidden="true"></i>'.html_safe %>
+    <% end %>
+  <% end %>
+  <br> <br>
 <%  } %>
 

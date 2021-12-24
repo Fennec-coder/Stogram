@@ -1,7 +1,7 @@
 <% if @user.id == current_user.id %>
-  <%=link_to (image_tag @user.avatar_url, :width => 350, :class=> "img-circular"), edit_user_path %>
+  <%=link_to (image_tag @user.avatar_url, :id=> "avatar-profile-large"), edit_user_path %>
   <% else %>
-  <%= image_tag @user.avatar_url, :width => 350 ,:class=> "img-circular" %>
+  <%= image_tag @user.avatar_url, :id=> "avatar-profile-large" %>
 <% end %>
 
 <h1><%=@user.username %> </h1>

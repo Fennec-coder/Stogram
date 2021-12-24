@@ -30,13 +30,11 @@
       <%else %>
         <li><%= link_to 'Sign up', new_user_registration_path %></li>
         <li><%= link_to '<i class="fa fa-sign-in" aria-hidden="true"></i>'.html_safe, new_user_session_path%></li>
-    <%end%>
-        <li><%= link_to '<i class="fa fa-sign-in" aria-hidden="true"></i>', new_user_session_path%></li>
       <%end%>
       <% if cookies[:theme] == "dark" %>
-        <%= link_to '<i class="fa fa-sun-o"></i>'.html_safe, root_path(theme: "light") %>
+        <li><%= link_to '<i class="fa fa-sun-o"></i>'.html_safe, root_path(theme: "light") %></li>
       <% else %>
-        <%= link_to '<i class="fa fa-moon-o"></i>'.html_safe, root_path(theme: "dark") %>
+        <li><%= link_to '<i class="fa fa-moon-o"></i>'.html_safe, root_path(theme: "dark") %></li>
       <% end %>
     </ul>
   </div>

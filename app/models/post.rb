@@ -9,4 +9,6 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :delete_all
   has_many :likes, dependent: :delete_all
 
+  scope :likes, -> { Like.where(post_id: id) }
+
 end
