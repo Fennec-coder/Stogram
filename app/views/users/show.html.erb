@@ -1,3 +1,9 @@
+<% if @user.id == current_user.id %>
+  <%=link_to (image_tag @user.avatar_url, :width => 350, :class=> "img-circular"), edit_user_path %>
+  <% else %>
+  <%= image_tag @user.avatar_url, :width => 350 ,:class=> "img-circular" %>
+<% end %>
+
 <h1><%=@user.username %> </h1>
 <h4><%=@user.name %></h4>
 <% unless @user.bio.nil? %>
@@ -15,7 +21,7 @@
 
 
 <% if current_user.present? && current_user != @user %>
-  <% if (Follow.where(follower: current_user, being_followed: @user.id).take == nil) %>
+  <% if current_user.subscribed(@user).nil? %>
     <%= link_to("<button>Follow</button>".html_safe, follows_path(being_followed_id: @user.id), method: :post) %>
   <%else%>
     <%= link_to("<button>Unfollow</button>".html_safe, follow_path(being_followed_id: @user.id), method: :delete) %>
