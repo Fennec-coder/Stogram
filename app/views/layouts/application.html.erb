@@ -22,28 +22,27 @@
         <a href="/"><i class="fa fa-angellist"></i> STOGRAM</a>
       </div>
 
-      <!-- Navbar Links -->
-      <ul id="menu">
-        <li><a href="/">Home</a></li>
-        <%if user_signed_in? %>
-          <li><%= link_to 'Profile', user_path(current_user) %></li>
-          <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
-        <%else %>
-          <li><%= link_to 'Sign in', new_user_session_path%></li>
-          <li><%= link_to 'Sign up', new_user_registration_path %></li>
-        <%end%>
-        <% if cookies[:theme] == "dark" %>
-          <%= link_to '<i class="fa fa-sun-o"></i>'.html_safe, root_path(theme: "light") %>
-        <% else %>
-          <%= link_to '<i class="fa fa-moon-o"></i>'.html_safe, root_path(theme: "dark") %>
-        <% end %>
-      </ul>
-    </div>
-  </nav>
-
-  <div class="content">
-    <%= yield %>
+    <!-- Navbar Links -->
+    <ul id="menu">
+      <%if user_signed_in? %>
+        <li><%= link_to 'Profile', user_path(current_user) %></li>
+        <li><%= link_to '<i class="fa fa-sign-out" aria-hidden="true"></i>'.html_safe, destroy_user_session_path, method: :delete %></li>
+      <%else %>
+        <li><%= link_to 'Sign up', new_user_registration_path %></li>
+        <li><%= link_to '<i class="fa fa-sign-in" aria-hidden="true"></i>', new_user_session_path%></li>
+      <%end%>
+      <% if cookies[:theme] == "dark" %>
+        <%= link_to '<i class="fa fa-sun-o"></i>'.html_safe, root_path(theme: "light") %>
+      <% else %>
+        <%= link_to '<i class="fa fa-moon-o"></i>'.html_safe, root_path(theme: "dark") %>
+      <% end %>
+    </ul>
   </div>
+</nav>
+
+<div class="content">
+  <%= yield %>
+</div>
 
 </body>
 </html>
