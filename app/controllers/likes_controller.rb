@@ -1,4 +1,8 @@
+# frozen_string_literal: true
+
 class LikesController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     @post = Post.find(params[:post_id])
     @like = Like.where(user_id: current_user.id, post_id: params[:post_id])
@@ -9,7 +13,6 @@ class LikesController < ApplicationController
     else
       redirect_to @post, flash: { alert: 'Like is already there' }
     end
-
   end
 
   def destroy
