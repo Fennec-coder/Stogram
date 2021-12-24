@@ -1,3 +1,12 @@
+body.light {
+    color: #1f1f1f;
+    background-color: #d9d9d9;
+}
+body.dark {
+    color: #d5d5d5;
+    background-color: #292b2c;
+}
+
 /*
  *= require_tree .
  *= require_self
@@ -24,9 +33,9 @@ a {
 /*======================================================
                           Navbar
   ======================================================*/
+
 #navbar {
-    background: white;
-    color: rgb(13, 26, 38);
+    background: rgba(255, 255, 255, 0.06);
     position: fixed;
     top: 0;
     height: 60px;
@@ -79,7 +88,6 @@ a {
 }
 
 #navbar li a {
-    color: rgb(13, 26, 38);
     display: block;
     font-size: 0.7em;
     height: 50px;

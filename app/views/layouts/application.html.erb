@@ -11,34 +11,39 @@
 
 </head>
 
-<body>
+<body class="<%= cookies[:theme] %>">
 
-<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<nav id="navbar" class="">
-  <div class="nav-wrapper">
-    <!-- Navbar Logo -->
-    <div class="logo">
-      <!-- Logo Placeholder for Inlustration -->
-      <a href="/"><i class="fa fa-angellist"></i> STOGRAM</a>
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <nav id="navbar" class="">
+    <div class="nav-wrapper">
+      <!-- Navbar Logo -->
+      <div class="logo">
+        <!-- Logo Placeholder for Inlustration -->
+        <a href="/"><i class="fa fa-angellist"></i> STOGRAM</a>
+      </div>
+
+      <!-- Navbar Links -->
+      <ul id="menu">
+        <li><a href="/">Home</a></li>
+        <%if user_signed_in? %>
+          <li><%= link_to 'Profile', user_path(current_user) %></li>
+          <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
+        <%else %>
+          <li><%= link_to 'Sign in', new_user_session_path%></li>
+          <li><%= link_to 'Sign up', new_user_registration_path %></li>
+        <%end%>
+        <% if cookies[:theme] == "dark" %>
+          <%= link_to '<i class="fa fa-sun-o"></i>'.html_safe, root_path(theme: "light") %>
+        <% else %>
+          <%= link_to '<i class="fa fa-moon-o"></i>'.html_safe, root_path(theme: "dark") %>
+        <% end %>
+      </ul>
     </div>
+  </nav>
 
-    <!-- Navbar Links -->
-    <ul id="menu">
-      <li><a href="/">Home</a></li>
-      <%if user_signed_in? %>
-        <li><%= link_to 'Profile', user_path(current_user) %></li>
-        <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
-      <%else %>
-        <li><%= link_to 'Sign in', new_user_session_path%></li>
-        <li><%= link_to 'Sign up', new_user_registration_path %></li>
-      <%end%>
-    </ul>
+  <div class="content">
+    <%= yield %>
   </div>
-</nav>
-
-<div class="content">
-  <%= yield %>
-</div>
 
 </body>
 </html>
