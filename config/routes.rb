@@ -6,21 +6,21 @@ Rails.application.routes.draw do
 
   resources :posts
 
-  resources :users, only: [:new, :create, :edit, :show] do
+  resources :users, only: %i[new create edit show update] do
     resources :posts
 
     resources :followers, only: :index
     resources :followings, only: :index
   end
 
-  resources :follows, only: [:create, :destroy]
+  resources :follows, only: %i[create destroy]
 
   resources :posts do
-    resources :comments, only: [:create, :destroy]
+    resources :comments, only: %i[create destroy]
   end
 
   resources :posts do
-    resources :likes, only: [:create, :destroy, :index]
+    resources :likes, only: %i[create destroy index]
   end
 
 end

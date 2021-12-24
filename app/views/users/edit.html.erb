@@ -1,0 +1,9 @@
+<h2>Change photo</h2>
+<%= form_for @user, html: { multipart: true } do |f| %>
+  <div class="field">
+    <%= f.hidden_field :avatar, value: @user.cached_avatar_data %>
+    <%= f.file_field :avatar %>
+  </div>
+  <br>
+  <%= f.submit 'Change'%>
+<% end %>
