@@ -1,22 +1,27 @@
+# frozen_string_literal: true
+
 class FollowsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    follower_user = current_user
-    following_user = User.find(params[:being_followed_id])
+    followed = User.find(params[:being_followed_id])
 
-    Follow.create(follower: follower_user, being_followed: following_user)
+    Follow.create(
+      follower: current_user,
+      being_followed: followed
+    )
 
-    redirect_to user_followings_path(current_user)
+    redirect_to followed
   end
 
-
   def destroy
-    follower_user = current_user
-    following_user = User.find(params[:id])
+    followed = User.find(params[:id])
 
-    Follow.where(follower: follower_user, being_followed: following_user).destroy_all
+    Follow.where(
+      follower: current_user,
+      being_followed: followed
+    ).destroy_all
 
-    redirect_to user_followings_path(current_user)
+    redirect_to followed
   end
 end

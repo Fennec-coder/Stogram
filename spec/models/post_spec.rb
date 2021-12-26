@@ -5,7 +5,7 @@ RSpec.describe Post, type: :model do
 
   it { is_expected.to have_many(:comments) }
 
-  it { is_expected.to have_many(:likes) }
+  it { is_expected.to have_many(:grades) }
 
   describe 'validations' do
     it { should validate_presence_of(:description) }

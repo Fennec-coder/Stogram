@@ -1,50 +1,61 @@
-<h3><%= link_to "#{@user.username}", user_path(@user)  %></h3>
-<br>
-<%= image_tag @post.image_url, :width => 350 %>
-<br>
+<%= image_tag @post.image_url, :width => 350 %><br>
+
+<h3><%= link_to "#{@user.username}", user_path(@user) %></h3><br>
+
 <h6>description</h6>
-<p> <%= @post.description %> </p>
+
+<p> <%= @post.description %> </p> <br>
+
+<% if @post.grades.where(user_id: current_user.id).empty? %>
+
+  <%= link_to('<i class="fa fa-heart-o" aria-hidden="true"></i>'.html_safe,
+              post_grades_path(user_id: current_user.id,
+                               post_id: @post.id,
+                               positive: true),
+              method: :create) %>
+
+<% else %>
+  <%= link_to('<i class="fa fa-heart" aria-hidden="true"></i>'.html_safe,
+              post_grade_path(user_id: current_user.id,
+                              post_id: @post.id,
+                              positive: true),
+              method: :delete) %>
+<% end %>
+<%= link_to("#{@post.grades.size}", post_grades_path(post_id: @post.id)) %> <br> <br>
+
+<% if @user.id == current_user.id %>
+  <td><%= button_to 'Edit', edit_user_post_path(@user, @post), method: :get %></td>
+  <td><%= button_to 'Destroy', user_post_path(@user, @post), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  <br>
+<% end %>
+
+<%= form_for([@post, @post.comments.build]) do |form| %>
+
+  <%= current_user.username %>, your comment?
+  <div class="field">
+    <%= form.text_area :body %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+<br>
 
 <h2> All comments </h2>
 
-<% @post.comments.each do |comment| %>
+<% @post.comments.order(created_at: :desc).each do |comment| %>
   <tr>
-    <td><%= User.find(comment.user_id).username %></td> said:
-    <td><%= comment.body %></td>
-    <br>
-    <% if current_user.present? && current_user.id == comment.user_id %>
-      <%= link_to("Delete", post_comment_path(post_id: @post.id, comment_id: comment.id), method: :delete) %>
-    <%end%>
-    <br>
+    <% unless comment.user.nil? %>
+      <td><%= comment.user.username %></td>
+      said:
+      <td><%= comment.body %></td>
+      <br>
+
+      <% if current_user.present? && current_user.id == comment.user_id %>
+        <%= link_to("Delete", post_comment_path(post_id: @post.id, comment_id: comment.id), method: :delete) %>
+      <% end %> <br>
+
+    <% end %>
   </tr>
-<%end%>
-
-<% if user_signed_in? %>
-
-  <% if Like.where(user_id: current_user.id, post_id: @post.id).empty? %>
-
-  <%= link_to('<i class="fa fa-heart-o" aria-hidden="true"></i>'.html_safe,
-              post_likes_path(user_id: current_user.id,
-                              post_id: @post.id),
-              method: :create) %>
-
-  <% else %>
-    <%= link_to('<i class="fa fa-heart" aria-hidden="true"></i>'.html_safe,
-                post_like_path(user_id: current_user.id,
-                                   post_id: @post.id),
-                   method: :delete)%>
-  <% end %>
-  <%= link_to("#{@post.likes.size}", post_likes_path(post_id: @post.id)) %>
-    <br>
-  <%= form_for([@post, @post.comments.build]) do |form|%>
-
-    <%= current_user.name %>, your comment?
-    <div class="field">
-      <%= form.text_area(:body) %>
-    </div>
-
-    <div class="actions">
-      <%= form.submit %>
-    </div>
-  <% end %>
 <% end %>
