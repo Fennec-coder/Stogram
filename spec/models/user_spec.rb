@@ -4,7 +4,7 @@ RSpec.describe User, type: :model do
   subject { build(:user) }
 
   it { is_expected.to have_many(:posts) }
-  it { is_expected.to have_many(:likes) }
+  it { is_expected.to have_many(:grades) }
 
   it { is_expected.to have_many(:follower_follows).with_foreign_key(:being_followed_id).class_name('Follow') }
   it { is_expected.to have_many(:followers).through(:follower_follows).source(:follower) }
