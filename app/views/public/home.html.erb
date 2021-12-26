@@ -5,18 +5,18 @@
 <br>
 
 <% @selected_posts.each { |post| %>
-  <%= link_to (image_tag post.image_url, :id=> 'square-post-medium'), user_post_path(post.user_id, post) %>
+  <%= link_to (image_tag post.image_url, :id => 'square-post-medium'), user_post_path(post.user_id, post) %>
   <br> <br>
-<%  } if user_signed_in? && current_user.followers.any?%>
+<% } if user_signed_in? && current_user.followers.any? %>
 
 <h1>maybe something new</h1>
 <br>
 <% @new_posts.each { |post| %>
-  <%=  link_to (image_tag post.image_url, :id=> 'square-post-medium'), user_post_path(post.user_id, post) %>
-  <p> <%=  post.likes.size  %> </p>
+  <%= link_to (image_tag post.image_url, :id => 'square-post-medium'), user_post_path(post.user_id, post) %>
+  <p> <%= post.grades.size %> </p>
   <% if user_signed_in? %>
 
-    <% if Like.where(user_id: current_user.id, post_id: post.id).empty? %>
+    <% if Grade.where(user_id: current_user.id, post_id: post.id).empty? %>
 
       <%= '<i class="fa fa-heart-o" aria-hidden="true"></i>'.html_safe %>
 
