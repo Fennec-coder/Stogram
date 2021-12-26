@@ -15,7 +15,7 @@ RSpec.describe FollowsController, type: :controller do
 
     it 'create follows' do
       expect { subject }.to change { Follow.count }.by(1)
-      is_expected.to redirect_to(user_followings_path(user))
+      is_expected.to redirect_to(user_path(user))
     end
   end
 
@@ -28,7 +28,6 @@ RSpec.describe FollowsController, type: :controller do
 
     it 'destroy follow' do
       expect { subject }.to change { Follow.count }.by(-1)
-      is_expected.to redirect_to(user_followings_path(user))
     end
   end
 end

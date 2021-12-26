@@ -1,51 +1,48 @@
 <% if @user.id == current_user.id %>
-  <%=link_to (image_tag @user.avatar_url, :id=> "avatar-profile-large"), edit_user_path %>
-  <% else %>
-  <%= image_tag @user.avatar_url, :id=> "avatar-profile-large" %>
+  <%= link_to (image_tag @user.avatar_url, :id => "avatar-profile-large"), edit_user_path %>
+<% else %>
+  <%= image_tag @user.avatar_url, :id => "avatar-profile-large" %>
 <% end %>
 
-<h1><%=@user.username %> </h1>
-<h4><%=@user.name %></h4>
+<h1><%= @user.username %> </h1>
+<h4><%= @user.name %></h4>
 <% unless @user.bio.nil? %>
   <h5>bio:</h5><br>
-  <h5><%=@user.bio%></h5>
+  <h5><%= @user.bio %></h5>
 <% end %>
 
 <% unless @followers.nil? %>
-  <h5>subscribers <%=@followers.size%></h5>
+  <h5>subscribers <%= @followers.size %></h5>
 <% end %>
 
-<%=link_to '<button>Edit profile</button>'.html_safe, edit_user_registration_path if @user.id == current_user.id%>
+<% if @user.id == current_user.id %>
 
-<%=link_to '<button>Create post</button>'.html_safe, new_user_post_path(@user, @post) if @user.id == current_user.id %>
+  <%= button_to 'Edit profile', edit_user_registration_path, :method => :get %>
+  <%= button_to 'Create post', new_user_post_path(@user, @post), :method => :get %>
+  <%= button_to 'My follows', user_followings_path(current_user), :method => :get %>
 
-
-<% if current_user.present? && current_user != @user %>
+<% else %>
   <% if current_user.subscribed(@user).nil? %>
-    <%= link_to("<button>Follow</button>".html_safe, follows_path(being_followed_id: @user.id), method: :post) %>
-  <%else%>
-    <%= link_to("<button>Unfollow</button>".html_safe, follow_path(being_followed_id: @user.id), method: :delete) %>
-  <%end%>
-<% end%>
+
+    <%= button_to 'Follow', follows_path(being_followed_id: @user.id), method: :post %>
+
+  <% else %>
+
+    <%= button_to 'Unfollow', follow_path(being_followed_id: @user.id), method: :delete %>
+
+  <% end %>
+<% end %>
 
 
-<%unless @posts.empty? %>
+<% unless @posts.empty? %>
   <h3>Posts:</h3>
   <br>
 <% end %>
 <tbody>
 <% @posts.each do |post| %>
   <tr>
-    <td><%= image_tag post.image_url, :width => 350 %></td>
+    <td><%= link_to (image_tag post.image_url, :id => 'square-post-medium'), user_post_path(@user, post) %></td>
     <br>
-    <td><%= post.description %></td>
-    <br>
-    <td><%= link_to 'Show', user_post_path(@user,post) %></td>
-    <% if @user.id == current_user.id  %>
-      <td><%= link_to 'Edit', edit_user_post_path(@user,post) %></td>
-      <td><%= link_to 'Destroy', user_post_path(@user,post), method: :delete, data: {confirm: 'Are you sure?'} %></td>
-      <br>
-    <% end %>
-  </tr>
-<%end%>
+
+<% end %>
 </tbody>
