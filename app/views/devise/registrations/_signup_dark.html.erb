@@ -1,0 +1,64 @@
+<div class="flex bg-gray-900 rounded-lg shadow-lg overflow-hidden mx-auto my-4 max-w-sm lg:max-w-md">
+  <div class="w-full p-8">
+    <h2 class="mb-4 font-bold self-center text-xl sm:text-3xl text-gray-200">Sign up</h2>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+        <div class="flex flex-col mb-5 text-left">
+          <label class="mb-1 text-base tracking-wide text-gray-200"> Username:</label>
+            <div class="relative">
+              <div class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
+                <i class="fas fa-user text-gray-200"></i>
+              </div>
+              <input class="bg-gray-900 focus:bg-gray-800 text-sm placeholder-gray-500 pl-10 pr-4 rounded-xl border border-gray-700 w-full py-2 focus:outline-none focus:border-indigo-700" autofocus="autofocus" placeholder="Username" autocomplete="username" type="text" name="user[username]" id="user_username">
+            </div>
+        </div>
+        <div class="flex flex-col mb-5 text-left">
+          <label class="mb-1 text-base tracking-wide text-gray-200"> Name:</label>
+            <div class="relative">
+              <div class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
+                <i class="fas fa-user text-gray-200"></i>
+              </div>
+              <input class="bg-gray-900 focus:bg-gray-800 text-sm placeholder-gray-500 pl-10 pr-4 rounded-xl border border-gray-700 w-full py-2 focus:outline-none focus:border-indigo-700" autofocus="autofocus" placeholder="Name" autocomplete="name" type="text" name="user[name]" id="user_name">
+            </div>
+        </div>
+        <div class="flex flex-col mb-5 text-left">
+          <label class="mb-1 text-base tracking-wide text-gray-200"> E-Mail:</label>
+            <div class="relative">
+              <div class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
+                <i class="fas fa-at text-gray-200"></i>
+              </div>
+              <input class="bg-gray-900 focus:bg-gray-800 text-sm placeholder-gray-500 pl-10 pr-4 rounded-xl border border-gray-700 w-full py-2 focus:outline-none focus:border-indigo-700" autofocus="autofocus" placeholder="Email" autocomplete="email" type="email" value="" name="user[email]" id="user_email">
+            </div>
+        </div>
+        <div class="flex flex-col mb-6 text-left text-gray-200">
+          <label class="mb-1 text-base tracking-wide"> Password:</label>
+            <% if @minimum_password_length %>
+                <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %>
+            <div class="relative">
+              <div class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
+                <span>
+                  <i class="fas fa-lock text-gray-200"></i>
+                </span>
+              </div>
+              <input class="bg-gray-900 focus:bg-gray-800 text-sm placeholder-gray-500 pl-10 pr-4 rounded-xl border border-gray-700 w-full py-2 focus:outline-none focus:border-indigo-700" placeholder="Password" autocomplete="new-password" type="password" name="user[password]" id="user_password" aria-autocomplete="list">
+            </div>
+        </div>
+        <div class="flex flex-col mb-6 text-left">
+          <label class="mb-1 text-base tracking-wide text-gray-200"> Password Confirmation:</label>
+            <div class="relative">
+              <div class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
+                <span>
+                  <i class="fas fa-lock text-gray-200"></i>
+                </span>
+              </div>
+              <input class="bg-gray-900 focus:bg-gray-800 text-sm placeholder-gray-500 pl-10 pr-4 rounded-xl border border-gray-700 w-full py-2 focus:outline-none focus:border-indigo-700" placeholder="Password Confirmation" autocomplete="new-password" type="password" name="user[password_confirmation]" id="user_password_confirmation">
+            </div>
+        </div>
+        <div class="flex justify-between mt-6">
+          <a class="px-8 py-3 bg-indigo-800 text-gray-200 text-sm font-semibold rounded hover:bg-indigo-700" href="/users/sign_in"> Log in </a>
+          <%= f.submit "Sign up", class: "px-8 py-3 bg-indigo-800 text-gray-200 text-sm font-semibold rounded hover:bg-indigo-700" %>
+        </div>
+    <% end %>
+  </div>
+</div>
