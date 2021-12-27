@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.3'
+ruby '3.0.1'
 # will load new rubyzip version
 gem 'rubyzip', '> 2.3.0'
 
@@ -90,3 +90,5 @@ gem 'rails-controller-testing'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'pry-byebug'
+
+gem 'ransack'

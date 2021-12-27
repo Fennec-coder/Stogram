@@ -30,4 +30,15 @@ class User < ApplicationRecord
     Follow.where(follower_id: id, being_followed_id: being_followed_id).take
   end
 
+  def self.search_by_name(search)
+    where 'name LIKE ?', "%#{search}%"
+  end
+
+  def self.search_by_username(search)
+    where 'username LIKE ?', "%#{search}%"
+  end
+
+  def self.search_by_email(search)
+    where 'email LIKE ?', "%#{search}%"
+  end
 end

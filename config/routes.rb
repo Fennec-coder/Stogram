@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   resources :posts
 
-  resources :users, only: %i[new create edit show update] do
+  resources :users, only: %i[new create edit show update index] do
     resources :posts
 
     resources :followers, only: :index
