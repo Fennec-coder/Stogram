@@ -6,7 +6,7 @@
 
 <p> <%= @post.description %> </p> <br>
 
-<% if @post.grades.where(user_id: current_user.id).empty? %>
+<% if @post.grades.where(user_id: current_user.id, positive: true).empty? %>
 
   <%= link_to('<i class="fa fa-heart-o" aria-hidden="true"></i>'.html_safe,
               post_grades_path(user_id: current_user.id,
@@ -21,7 +21,29 @@
                               positive: true),
               method: :delete) %>
 <% end %>
-<%= link_to("#{@post.grades.size}", post_grades_path(post_id: @post.id)) %> <br> <br>
+<%= link_to("#{@post.grades.where(positive: true).size}", post_grades_path(post_id: @post.id,
+                                                                           positive: true)) %> <br> <br>
+
+<% if @post.grades.where(user_id: current_user.id, positive: false).empty? %>
+
+  <%= link_to('<i class="fa fa-thumbs-o-down" aria-hidden="true"></i>'.html_safe,
+              post_grades_path(user_id: current_user.id,
+                               post_id: @post.id,
+                               positive: false),
+              method: :create) %>
+
+<% else %>
+  <%= link_to('<i class="fa fa-thumbs-down" aria-hidden="true"></i>'.html_safe,
+              post_grade_path(user_id: current_user.id,
+                              post_id: @post.id,
+                              positive: false),
+              method: :delete) %>
+<% end %>
+
+<%= link_to("#{@post.grades.where(positive: false).size}", post_grades_path(post_id: @post.id,
+                                                                            positive: false)) %> <br> <br>
+
+
 
 <% if @user.id == current_user.id %>
   <td><%= button_to 'Edit', edit_user_post_path(@user, @post), method: :get %></td>

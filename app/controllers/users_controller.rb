@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   before_action :authenticate_user!
 
@@ -20,5 +22,4 @@ class UsersController < ApplicationController
   def post_params
     params.require(:user).permit(:avatar)
   end
-
 end
