@@ -5,10 +5,12 @@ class ImageUploader < Shrine
   plugin :validation_helpers
 
   Attacher.default_url do |**_options|
-    'otter by fen.png'
+    'gif-preview.gif'
+    'jpg-preview.jpg'
+    'png-preview.png'
   end
 
   Attacher.validate do
-    validate_extension %w[jpeg png gif jpg]
+    validate_extension %w[png gif jpg]
   end
 end
