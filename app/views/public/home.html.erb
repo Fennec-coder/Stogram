@@ -4,6 +4,14 @@
 <% end %>
 <br>
 
+<%= search_form_for @query do |f| %>
+
+  <%= f.label :username_cont %>
+  <%= f.search_field :username_cont %>
+
+  <%= f.submit %>
+<% end %><br>
+
 <% @selected_posts.each { |post| %>
   <%= link_to (image_tag post.image_url, :id => 'square-post-medium'), user_post_path(post.user_id, post) %>
   <br> <br>
