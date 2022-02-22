@@ -24,4 +24,6 @@ Rails.application.routes.draw do
   resources :posts do
     resources :grades, only: %i[create destroy index]
   end
+
+  get :search, to: 'search#index'
 end

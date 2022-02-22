@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'capybara/rails'
 require 'database_cleaner/active_record'
@@ -43,7 +45,7 @@ RSpec.describe CommentsController, type: :controller do
 
     describe '#destroy' do
       let!(:post) { create :post, user: user }
-      let!(:comment) { create :comment, user_id: user.id, post: post}
+      let!(:comment) { create :comment, user_id: user.id, post: post }
 
       let(:params) { { post_id: post.id, id: comment.id } }
 

@@ -48,7 +48,6 @@ RSpec.describe PostsController, type: :controller do
     end
   end
 
-
   describe '#destroy' do
     let!(:post) { create :post, user: user }
     let(:params) { { id: post, user_id: user } }

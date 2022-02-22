@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
@@ -13,12 +15,11 @@ RSpec.describe User, type: :model do
   it { is_expected.to have_many(:being_followeds).through(:following_follows).source(:being_followed) }
 
   describe '#email' do
-    it { is_expected.to_not allow_value("invalid_email").for(:email) }
-    it { is_expected.to allow_value("valid@email.com").for(:email) }
+    it { is_expected.to_not allow_value('invalid_email').for(:email) }
+    it { is_expected.to allow_value('valid@email.com').for(:email) }
   end
 
   describe 'validations' do
     it { should validate_presence_of(:email) }
   end
-
 end
