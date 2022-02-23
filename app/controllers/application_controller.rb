@@ -6,8 +6,7 @@ class ApplicationController < ActionController::Base
 
   def set_theme
     if params[:theme].present?
-      theme = params[:theme].to_sym
-      cookies[:theme] = theme
+      cookies[:theme] = params[:theme].to_sym
       redirect_to(request.referrer || root_path)
     end
   end

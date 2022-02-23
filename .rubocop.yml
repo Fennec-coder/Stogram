@@ -1,0 +1,102 @@
+# Exclude auto-generated files
+AllCops:
+  SuggestExtensions: false
+  NewCops: enable
+  Exclude:
+    - config.ru
+    - db/**/*
+    - config/**/*
+    - script/**/*
+    - bin/*
+    - spec/rails_helper.rb
+
+# Emacs nicely aligns trailing comments, keep them
+Layout/ExtraSpacing:
+  AllowBeforeTrailingComments: true
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented_relative_to_receiver
+
+# Braces for multiline blocks are sometimes ok
+Style/BlockDelimiters:
+  EnforcedStyle: braces_for_chaining
+
+# No metrics for now
+Metrics:
+  Enabled: false
+
+# The motivation behind the predicates is weak, and the result code is vague
+Style/NumericPredicate:
+  EnforcedStyle: comparison
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+# Github does it, why can't we do
+Layout/LineLength:
+  Max: 120
+
+# Stop holy wars
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+# We don't write documentation in the code for projects
+Style/Documentation:
+  Enabled: false
+
+# Don't care
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+# Tables are much easier to read
+Layout/HashAlignment:
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle: table
+
+# It's typical for rspec to use lines like
+#   expect { subject }.to change { foo }
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - spec/**/*
+
+# This one is generally weird
+Style/MultilineBlockChain:
+  Enabled: false
+
+# Useful in controllers with dry-monads
+Lint/NonLocalExitFromIterator:
+  Enabled: false
+
+# Doesn't work well with sorbet signatures for attr_*
+Style/AccessorGrouping:
+  Enabled: false
+
+# This doesn't always make sense
+Lint/MissingSuper:
+  Enabled: false
+
+# Sometimes we need to put russian snippets into comments
+Style/AsciiComments:
+  Enabled: false
+
+# Same looking loops may have completely different meaning
+Style/CombinableLoops:
+  Enabled: false
+
+# I'll pick my own, thank you very much
+Naming/HeredocDelimiterNaming:
+  Enabled: false
+
+# Parens! Parens!
+Style/TernaryParentheses:
+  EnforcedStyle: require_parentheses_when_complex
+
+# Who didn't learn math in school?
+Lint/AmbiguousOperatorPrecedence:
+  Enabled: false
+
+Lint/Void:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
