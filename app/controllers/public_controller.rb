@@ -7,7 +7,5 @@ class PublicController < ApplicationController
     end
     @new_posts = Post.limit(15).order(created_at: :desc)
     @new_posts = Post.where.not(user_id: current_user.id).limit(15).order(created_at: :desc) unless current_user.nil?
-
-    @query = User.ransack(params[:query])
   end
 end

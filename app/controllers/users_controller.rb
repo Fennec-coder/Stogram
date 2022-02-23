@@ -4,7 +4,6 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @query = User.ransack(params[:query])
     @users = @query.result(distinct: true)
   end
 

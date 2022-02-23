@@ -182,10 +182,6 @@ GEM
       rake (>= 0.13)
       thor (~> 1.0)
     rake (13.0.6)
-    ransack (2.5.0)
-      activerecord (>= 5.2.4)
-      activesupport (>= 5.2.4)
-      i18n
     regexp_parser (2.2.0)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -292,7 +288,6 @@ DEPENDENCIES
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4)
   rails-controller-testing
-  ransack
   rspec-rails (~> 5.0.0)
   rubyzip (> 2.3.0)
   sass-rails (>= 6)
@@ -307,7 +302,7 @@ DEPENDENCIES
   zip-zip
 
 RUBY VERSION
-   ruby 3.0.1p64
+   ruby 2.7.3p183
 
 BUNDLED WITH
    2.2.26
