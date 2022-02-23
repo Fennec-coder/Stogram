@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   def update
     user = User.find(params[:id])
     user.update(post_params)
-    redirect_to user, flash: { success: 'User was updated' }
+    redirect_to user, flash: { success: "User was updated" }
   end
 
   def post_params

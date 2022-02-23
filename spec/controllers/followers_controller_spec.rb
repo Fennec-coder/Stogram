@@ -1,27 +1,29 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-require 'capybara/rails'
-require 'database_cleaner/active_record'
+# frozen_string_literal: true
+
+require "rails_helper"
+require "capybara/rails"
+require "database_cleaner/active_record"
 
 RSpec.describe FollowersController, type: :controller do
   let(:follower) { create :user }
 
   before { sign_in follower }
 
-  describe '#index' do
+  describe "#index" do
     let!(:following) { create :user }
     let!(:follow) { create :follow, follower: follower, being_followed: following }
     let(:params) { { user_id: following.id } }
 
     subject { get :index, params: params }
 
-    it 'assigns @followers' do
+    it "assigns @followers" do
       subject
       expect(assigns(:followers)).to eq([follower])
     end
 
-    it { is_expected.to render_template('index') }
+    it { is_expected.to render_template("index") }
   end
 end
 DatabaseCleaner.clean

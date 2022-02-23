@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-require 'ffaker'
+# frozen_string_literal: true
+
+require "ffaker"
 # This will guess the User class
 FactoryBot.define do
   # aliases:
@@ -9,7 +11,7 @@ FactoryBot.define do
     name { FFaker::Name.name }
     username { FFaker::Name.name }
     email { FFaker::Internet.email }
-    password { 'password' }
-    password_confirmation { 'password' }
+    password { "password" }
+    password_confirmation { "password" }
   end
 end

@@ -20,10 +20,10 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id if user_signed_in?
     if @post.save
-      redirect_to @post, flash: { success: 'Post was added' }
+      redirect_to @post, flash: { success: "Post was added" }
     else
       flash[:order_errors] = @post.errors.full_messages
-      render :new, flash: { alert: 'Some error occured' }
+      render :new, flash: { alert: "Some error occured" }
     end
   end
 
@@ -34,7 +34,7 @@ class PostsController < ApplicationController
   def update
     post = Post.find(params[:id])
     post.update(post_params)
-    redirect_to post, flash: { success: 'Post was updated' }
+    redirect_to post, flash: { success: "Post was updated" }
   end
 
   def destroy

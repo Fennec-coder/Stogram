@@ -14,7 +14,7 @@ class GradesController < ApplicationController
       @grade.update(positive: params[:positive])
       redirect_to user_post_path(current_user, @post)
     else
-      redirect_to @post, flash: { alert: 'Grade is already there' }
+      redirect_to @post, flash: { alert: "Grade is already there" }
     end
   end
 
