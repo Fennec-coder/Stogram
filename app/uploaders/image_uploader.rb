@@ -8,6 +8,7 @@ class ImageUploader < Shrine
     "gif-preview.gif"
     "jpg-preview.jpg"
     "png-preview.png"
+    "avatar.jpg"
   end
 
   Attacher.validate do

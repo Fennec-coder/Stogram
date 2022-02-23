@@ -1,48 +1,82 @@
-<% if @user.id == current_user.id %>
-  <%= link_to (image_tag @user.avatar_url, :id => "avatar-profile-large"), edit_user_path %>
-<% else %>
-  <%= image_tag @user.avatar_url, :id => "avatar-profile-large" %>
-<% end %>
-
-<h1><%= @user.username %> </h1>
-<h4><%= @user.name %></h4>
-<% unless @user.bio.nil? %>
-  <h5>bio:</h5><br>
-  <h5><%= @user.bio %></h5>
-<% end %>
-
-<% unless @followers.nil? %>
-  <h5>subscribers <%= @followers.size %></h5>
-<% end %>
-
-<% if @user.id == current_user.id %>
-
-  <%= button_to 'Edit profile', edit_user_registration_path, :method => :get %>
-  <%= button_to 'Create post', new_user_post_path(@user, @post), :method => :get %>
-  <%= button_to 'My follows', user_followings_path(current_user), :method => :get %>
-
-<% else %>
-  <% if current_user.subscribed(@user).nil? %>
-
-    <%= button_to 'Follow', follows_path(being_followed_id: @user.id), method: :post %>
-
-  <% else %>
-
-    <%= button_to 'Unfollow', follow_path(being_followed_id: @user.id), method: :delete %>
-
-  <% end %>
-<% end %>
-
-
-<% unless @posts.empty? %>
-  <h3>Posts:</h3>
-  <br>
-<% end %>
-<tbody>
-<% @posts.each do |post| %>
-  <tr>
-    <td><%= link_to (image_tag post.image_url, :id => 'square-post-medium'), user_post_path(@user, post) %></td>
-    <br>
-
-<% end %>
-</tbody>
+<div class="max-w-2xl mx-auto">
+  <div class="px-3 py-2">
+    <div class="flex flex-col gap-1 text-center">
+      <div class="block mx-auto bg-center">
+        <% if @user.id == current_user.id %> 
+          <%= link_to (image_tag @user.avatar_url, class: "h-48 w-48 rounded-full"), edit_user_path %> 
+        <% else %>
+          <%= image_tag @user.avatar_url, class: "h-48 w-48 rounded-full" %>
+        <% end %>
+      </div>
+      <p class="font-serif font-semibold text-3xl"><%= @user.username %></p>
+      <span class="text-lg text-gray-900"><%= @user.name %></span>
+      <span class="text-sm text-gray-900">
+        <% unless @user.bio.nil? %>
+          <h5>bio:</h5><br>
+          <h5><%= @user.bio %></h5>
+        <% end %>
+      </span>
+    </div>
+    <div class="flex justify-center items-center gap-2 my-3">
+      <div class="font-semibold text-center mx-4">
+        <% unless @posts.nil? %>
+          <p class="text-black"><%=@posts.size%></p>
+        <% end %>
+          <span class="text-gray-900">Posts</span>
+      </div>
+      <div class="font-semibold text-center mx-4">
+        <% unless @followers.nil? %>
+          <p class="text-black"><%= @followers.size %></p>
+        <% end %>
+          <span class="text-gray-900">Followers</span>
+      </div>
+    </div>
+    <% if @user.id == current_user.id %>
+      <div class="flex justify-center gap-2 my-4">
+        <%= link_to new_user_post_path(@user, @post), method: :get do %>
+          <button type="submit" 
+            class="bg-pink-500 px-10 py-2 rounded-full text-white shadow-lg">
+            <span> Create post </span>
+          </button>
+        <% end %>
+        <%= link_to edit_user_registration_path, method: :get do %>
+          <button type="submit" 
+            class="bg-white border border-gray-500 px-10 py-2 rounded-full shadow-lg">
+            <span> Edit profile</span>
+          </button>
+        <% end %>
+      </div>      
+    <% else %>
+      <% if current_user.subscribed(@user).nil? %>
+        <%= link_to follows_path(being_followed_id: @user.id), method: :post do%>
+          <button type="submit" 
+            class="bg-pink-500 px-10 py-2 rounded-full text-white shadow-lg">
+            <span> Follow </span>
+          </button>
+        <% end %>
+      <% else %>
+        <%= link_to follow_path(being_followed_id: @user.id), method: :delete do%>
+          <button type="submit" 
+            class="bg-white border border-gray-500 px-10 py-2 rounded-full shadow-lg">
+            <span> Unfollow</span>
+          </button>
+        <% end %>
+      <% end %>
+    <% end %>
+    <div class="flex justify-between items-center py-4">
+        <div class="w-full py-2 border-b-2 border-yellow-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+              </svg>
+        </div>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-y-6 gap-x-6">
+        <% @posts.each do |post| %>
+          <div class="container mx-auto overflow-hidden rounded-lg max-w-md hover:shadow-2xl transition duration-300">
+            <%= link_to (image_tag post.image_url,class: "rounded-lg object-cover h-64 w-full"), user_post_path(@user, post) %>
+          </div> 
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
