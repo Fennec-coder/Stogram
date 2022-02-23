@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'ffaker'
 # This will guess the User class
 FactoryBot.define do

@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   before_action :authenticate_user!
+
   def create
     @post = Post.find(params[:post_id])
     @comment = @post.comments.create(user_id: current_user.id, body: params.require(:comment).values[0])

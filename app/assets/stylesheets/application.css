@@ -15,28 +15,35 @@ body.dark {
     -moz-border-radius: 150px;
 }
 
-#avatar-profile-small{
+#avatar-profile-small {
     margin-top: 12px;
-    object-fit:cover;
+    object-fit: cover;
     width: 25px;
     height: 25px;
     -webkit-border-radius: 200px;
     -moz-border-radius: 100px;
 }
 
-#square-post-medium{
+#square-post-large {
     margin-top: 12px;
-    object-fit:cover;
+    object-fit: cover;
+    width: 100%;
+    height: 25px;
+}
+
+#square-post-medium {
+    margin-top: 12px;
+    object-fit: cover;
     width: 400px;
     height: 400px;
 
 }
 
-#square-post-large{
+#square-post-small {
     margin-top: 12px;
-    object-fit:cover;
-    width: 100%;
-    height: 25px;
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
 }
 
 /*
