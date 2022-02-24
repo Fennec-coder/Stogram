@@ -68,6 +68,29 @@ a {
     text-decoration: none;
 }
 
+.custom-file-input::-webkit-file-upload-button {
+    display: none;
+  }
+  .custom-file-input::before {
+    content: 'Click to upload an image';
+    display: inline-block;
+    background: rgb(238,174,202);
+    background: linear-gradient(90deg, rgba(238,174,202,1) 0%, rgba(175,148,233,0.9864320728291317) 100%);
+    border-radius: 8px;
+    padding: 8px 8px 8px;
+    margin-right: 16px;
+    outline: none;
+    -webkit-user-select: none;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 12pt;
+  }
+  .custom-file-input:hover::before {
+    border-color: black;
+  }
+  .custom-file-input:active::before {
+    background: -webkit-linear-gradient(top, #dbbed7, #c5bbc7);
+  }
 
 /*======================================================
                           Navbar
