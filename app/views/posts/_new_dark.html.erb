@@ -1,0 +1,40 @@
+<div class="flex items-center justify-center w-full bg-gray-50 inset-0 px-4 md:px-6">
+  <div class="bg-gray-900 rounded-2xl shadow my-6 md:my-10 w-full max-w-4xl">
+  <%= form_for [@user, @post], html: { multipart: true } do |f| %>
+      <div class="pt-2 sm:pt-7 px-4 sm:px-8 pb-5 sm:pb-8">
+        <h3 class="text-left text-2xl sm:text-3xl font-extrabold text-gray-200 pt-4">Add publication</h3>
+        <div class="flex flex-wrap flex-col md:flex-row mt-3">
+          <div class="flex flex-col w-full md:w-1/2 mb-6 pr-0 md:pr-6 ">
+          <label class='text-base text-left sm:text-lg block mb-4 text-gray-200'>
+              Description
+            </label>
+            <%= f.text_area :description , class: "bg-gray-900 focus:bg-gray-800 text-sm placeholder-gray-500 pl-10 pr-4 rounded-xl border border-gray-700 w-full py-2 focus:outline-none focus:border-indigo-700" %>
+          </div>
+          <div class="flex flex-col w-full md:w-1/2 mb-6">
+            <label class='text-base text-left sm:text-lg block mb-4 text-gray-200'>
+              Cover Image
+            </label>
+            <%= f.hidden_field :image, value: @post.cached_image_data %>
+            <%= f.file_field :image , class: 'custom-file-input text-gray-200'%>
+          </div>
+        </div>
+        <div class="flex justify-between mt-0 sm:mt-8">
+          <%= link_to user_path(current_user), class: 'flex items-center' do%>
+            <button type="submit" class="bg-indigo-800 px-10 py-2 rounded-full text-white shadow-lg">
+              <svg class="md:hidden block w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd"></path></svg>
+              <span class="hidden md:block"> Cancel </span>
+            </button>
+          <% end %>
+          <div class="flex items-center">
+            <button type="submit" name="commit" value="Publish" class="bg-pink-500 px-10 py-2 rounded-full text-white shadow-lg" data-disable-with="Publish">
+              <svg class="md:hidden block w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span class="hidden md:block"> Publish </span>
+            </button>
+          </div>
+        </div> 
+      </div>
+    <% end %> 
+  </div>
+</div>
