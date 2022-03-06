@@ -13,26 +13,34 @@
   <%= link_to (image_tag post.image_url, :id => 'square-post-medium'), user_post_path(post.user_id, post) %>
   <div class="text-left flex">
     <div class="mr-2">
-      <% if post.grades.where(user_id: current_user.id, positive: true).empty? %>
-        <%= link_to('<i class="fa fa-heart-o" aria-hidden="true"></i>'.html_safe,
-                    post_grades_path(user_id: current_user.id, post_id: post.id, positive: true),
-                    method: :create) %>
+      <% if current_user %>
+        <% if post.grades.where(user_id: current_user.id, positive: true).empty? %>
+          <%= link_to('<i class="fa fa-heart-o" aria-hidden="true"></i>'.html_safe,
+                      post_grades_path(user_id: current_user.id, post_id: post.id, positive: true),
+                      method: :create) %>
+        <% else %>
+          <%= link_to('<i class="fa fa-heart" aria-hidden="true"></i>'.html_safe,
+                      post_grades_path(user_id: current_user.id, post_id: post.id, positive: true),
+                      method: :delete) %>
+        <% end %>
       <% else %>
-        <%= link_to('<i class="fa fa-heart" aria-hidden="true"></i>'.html_safe,
-                    post_grades_path(user_id: current_user.id, post_id: post.id, positive: true),
-                    method: :delete) %>
+        <%= '<i class="fa fa-heart-o" aria-hidden="true"></i>'.html_safe %>
       <% end %>
       <%= link_to("#{post.grades.where(positive: true).size}", post_grades_path(post_id: post.id, positive: true)) %>
     </div>
     <div class="ml-2">
-      <% if post.grades.where(user_id: current_user.id, positive: false).empty? %>
-        <%= link_to('<i class="fa fa-thumbs-o-down" aria-hidden="true"></i>'.html_safe,
-                    post_grades_path(user_id: current_user.id, post_id: post.id, positive: false),
-                    method: :create) %>
+      <% if current_user %>
+        <% if post.grades.where(user_id: current_user.id, positive: false).empty? %>
+          <%= link_to('<i class="fa fa-thumbs-o-down" aria-hidden="true"></i>'.html_safe,
+                      post_grades_path(user_id: current_user.id, post_id: post.id, positive: false),
+                      method: :create) %>
+        <% else %>
+          <%= link_to('<i class="fa fa-thumbs-down" aria-hidden="true"></i>'.html_safe,
+                      post_grades_path(user_id: current_user.id, post_id: post.id, positive: false),
+                      method: :delete) %>
+        <% end %>
       <% else %>
-        <%= link_to('<i class="fa fa-thumbs-down" aria-hidden="true"></i>'.html_safe,
-                    post_grades_path(user_id: current_user.id, post_id: post.id, positive: false),
-                    method: :delete) %>
+        <%= '<i class="fa fa-heart-o" aria-hidden="true"></i>'.html_safe %>
       <% end %>
       <%= link_to("#{post.grades.where(positive: false).size}", post_grades_path(post_id: post.id, positive: false)) %>
     </div>
