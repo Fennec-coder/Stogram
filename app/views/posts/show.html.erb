@@ -1,83 +1,112 @@
-<%= image_tag @post.image_url, :width => 350 %><br>
+<div class="max-w-2xl mx-auto">
 
-<h3><%= link_to "#{@user.username}", user_path(@user) %></h3><br>
-
-<h6>description</h6>
-
-<p> <%= @post.description %> </p> <br>
-
-<% if @post.grades.where(user_id: current_user.id, positive: true).empty? %>
-
-  <%= link_to('<i class="fa fa-heart-o" aria-hidden="true"></i>'.html_safe,
-              post_grades_path(user_id: current_user.id,
-                               post_id: @post.id,
-                               positive: true),
-              method: :create) %>
-
-<% else %>
-  <%= link_to('<i class="fa fa-heart" aria-hidden="true"></i>'.html_safe,
-              post_grade_path(user_id: current_user.id,
-                              post_id: @post.id,
-                              positive: true),
-              method: :delete) %>
-<% end %>
-<%= link_to("#{@post.grades.where(positive: true).size}", post_grades_path(post_id: @post.id,
-                                                                           positive: true)) %> <br> <br>
-
-<% if @post.grades.where(user_id: current_user.id, positive: false).empty? %>
-
-  <%= link_to('<i class="fa fa-thumbs-o-down" aria-hidden="true"></i>'.html_safe,
-              post_grades_path(user_id: current_user.id,
-                               post_id: @post.id,
-                               positive: false),
-              method: :create) %>
-
-<% else %>
-  <%= link_to('<i class="fa fa-thumbs-down" aria-hidden="true"></i>'.html_safe,
-              post_grade_path(user_id: current_user.id,
-                              post_id: @post.id,
-                              positive: false),
-              method: :delete) %>
-<% end %>
-
-<%= link_to("#{@post.grades.where(positive: false).size}", post_grades_path(post_id: @post.id,
-                                                                            positive: false)) %> <br> <br>
-
-
-
-<% if @user.id == current_user.id %>
-  <td><%= button_to 'Edit', edit_user_post_path(@user, @post), method: :get %></td>
-  <td><%= button_to 'Destroy', user_post_path(@user, @post), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  <br>
-<% end %>
-
-<%= form_for([@post, @post.comments.build]) do |form| %>
-
-  <%= current_user.username %>, your comment?
-  <div class="field">
-    <%= form.text_area :body %>
+  <%= image_tag @post.image_url, class: "max-h-full mx-auto" %>
+    <div class="text-left items-center my-2 flex">
+      <% if @user.id == current_user.id %>
+        <%= link_to edit_user_post_path(@user, @post), method: :get do %>
+          <button type="submit" class="border-pink-500 border-2 px-2 rounded-full shadow-lg mr-2">
+            <span> Edit </span>
+          </button>
+        <% end %>
+        <%= link_to user_post_path(@user, @post), method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <button type="submit" class="border-pink-500 border-2 px-2 rounded-full shadow-lg mr-2">
+            <span> Delete </span>
+          </button>
+        <% end %>
+      <% end %>
+      <span><%= @post.created_at.strftime("Created: #{@post.created_at.day.ordinalize} %B %Y") %></span>
+    </div>
+  <div class="my-1">
+    <h6>Description: </h6>
+    <p><%= @post.description %></p>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+
+  <div class="grid grid-cols-6 gap-4 my-1">
+    <div class="col-start-1 col-end-3">
+      <div class="text-left flex">
+        <div class="mr-2">
+          <% if @post.grades.where(user_id: current_user.id, positive: true).empty? %>
+            <%= link_to('<i class="fa fa-heart-o" aria-hidden="true"></i>'.html_safe,
+                        post_grades_path(user_id: current_user.id, post_id: @post.id, positive: true),
+                        method: :create) %>
+          <% else %>
+            <%= link_to('<i class="fa fa-heart" aria-hidden="true"></i>'.html_safe,
+                        post_grade_path(user_id: current_user.id, post_id: @post.id, positive: true),
+                        method: :delete) %>
+          <% end %>
+          <%= link_to("#{@post.grades.where(positive: true).size}", post_grades_path(post_id: @post.id, positive: true)) %>
+        </div>
+        <div class="ml-2">
+          <% if @post.grades.where(user_id: current_user.id, positive: false).empty? %>
+            <%= link_to('<i class="fa fa-thumbs-o-down" aria-hidden="true"></i>'.html_safe,
+                        post_grades_path(user_id: current_user.id, post_id: @post.id, positive: false),
+                        method: :create) %>
+          <% else %>
+            <%= link_to('<i class="fa fa-thumbs-down" aria-hidden="true"></i>'.html_safe,
+                        post_grade_path(user_id: current_user.id, post_id: @post.id, positive: false),
+                        method: :delete) %>
+          <% end %>
+          <%= link_to("#{@post.grades.where(positive: false).size}", post_grades_path(post_id: @post.id, positive: false)) %>
+        </div>
+      </div>
+    </div>
+    <div class="col-end-7 col-span-2 right-0 relative">
+      <div class="absolute flex inset-y-0 right-0">
+        <h3 class="mx-2"><%= link_to "#{@post.user.username}", user_path(@post.user) %></h3>
+        <%= image_tag @post.user.avatar_url, class: "h-12 w-12 rounded-full" %>
+      </div>
+    </div>
   </div>
-<% end %>
-<br>
 
-<h2> All comments </h2>
 
-<% @post.comments.order(created_at: :desc).each do |comment| %>
-  <tr>
-    <% unless comment.user.nil? %>
-      <td><%= comment.user.username %></td>
-      said:
-      <td><%= comment.body %></td>
-      <br>
 
-      <% if current_user.present? && current_user.id == comment.user_id %>
-        <%= link_to("Delete", post_comment_path(post_id: @post.id, comment_id: comment.id), method: :delete) %>
-      <% end %> <br>
+  <%= form_for([@post, @post.comments.build]) do |f| %>
+    <%= current_user.username %>, your comment?
+    <div class="max-w-lg mx-auto my-1">
+      <% if cookies[:theme] == "dark" %>
+        <%= f.text_area :body , class: "bg-gray-900 focus:bg-gray-800 text-sm placeholder-gray-500 pl-10 pr-4
+      rounded-xl border border-gray-700 w-full py-2 focus:outline-none focus:border-indigo-700" %>
+      <% else %>
+        <%= f.text_area :body , class: "transition-colors shadow-sm bg-gray-200 border border-blue-100 text-gray-900
+         sm:text-sm rounded-2xl hover:border-blue-500 border-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-4 pl-6" %>
+      <% end %>
+    </div>
 
+    <button type="submit" class="border-pink-500 border-2 px-2 rounded-full shadow-lg">
+      <span> Send comment </span>
+    </button>
+  <% end %>
+
+  <div class="mt-4">
+    <% if @post.comments.count > 0 %>
+      <h1>All comments:</h1>
     <% end %>
-  </tr>
-<% end %>
+      <% @post.comments.order(created_at: :desc).each do |comment| %>
+        <div class="grid grid-cols-10 gap-4 text-left block my-2">
+          <div class="col-span-1 flex">
+            <%= image_tag comment.user.avatar_url, class: "h-12 w-12 rounded-full" %>
+            <h3 class="mx-2"><%= link_to "#{comment.user.username}", user_path(comment.user) %></h3>
+          </div>
+          <div class="col-span-8 relative flex">
+            <div class="absolute bottom-0 left-0">
+              <%= comment.body %>
+            </div>
+          </div>
+          <div class="relative">
+            <div class="absolute right-0 inset-y-0">
+              <% if current_user.present? && current_user.id == comment.user_id %>
+                <%= link_to post_comment_path(post_id: @post.id, comment_id: comment.id), method: :delete do %>
+                  <button type="submit" class="border-pink-500 border-2 px-2 rounded-full shadow-lg">
+                    <span> Delete </span>
+                  </button>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <br><br><br><br>
+</div>

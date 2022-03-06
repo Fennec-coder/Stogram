@@ -1,0 +1,40 @@
+<div class="m-2">
+  <div class="grid grid-cols-3">
+    <div class="flex">
+      <%= image_tag post.user.avatar_url, class: "h-12 w-12 rounded-full" %>
+      <h3 class="mx-2"><%= link_to "#{post.user.username}", user_path(post.user) %></h3>
+    </div>
+    <div class="col-span-2 relative flex">
+      <div class="absolute bottom-0 right-0 mr-2">
+        <span><%= post.created_at.strftime("Created: #{post.created_at.day.ordinalize} %B %Y") %></span>
+      </div>
+    </div>
+  </div>
+  <%= link_to (image_tag post.image_url, :id => 'square-post-medium'), user_post_path(post.user_id, post) %>
+  <div class="text-left flex">
+    <div class="mr-2">
+      <% if post.grades.where(user_id: current_user.id, positive: true).empty? %>
+        <%= link_to('<i class="fa fa-heart-o" aria-hidden="true"></i>'.html_safe,
+                    post_grades_path(user_id: current_user.id, post_id: post.id, positive: true),
+                    method: :create) %>
+      <% else %>
+        <%= link_to('<i class="fa fa-heart" aria-hidden="true"></i>'.html_safe,
+                    post_grades_path(user_id: current_user.id, post_id: post.id, positive: true),
+                    method: :delete) %>
+      <% end %>
+      <%= link_to("#{post.grades.where(positive: true).size}", post_grades_path(post_id: post.id, positive: true)) %>
+    </div>
+    <div class="ml-2">
+      <% if post.grades.where(user_id: current_user.id, positive: false).empty? %>
+        <%= link_to('<i class="fa fa-thumbs-o-down" aria-hidden="true"></i>'.html_safe,
+                    post_grades_path(user_id: current_user.id, post_id: post.id, positive: false),
+                    method: :create) %>
+      <% else %>
+        <%= link_to('<i class="fa fa-thumbs-down" aria-hidden="true"></i>'.html_safe,
+                    post_grades_path(user_id: current_user.id, post_id: post.id, positive: false),
+                    method: :delete) %>
+      <% end %>
+      <%= link_to("#{post.grades.where(positive: false).size}", post_grades_path(post_id: post.id, positive: false)) %>
+    </div>
+  </div>
+</div>
