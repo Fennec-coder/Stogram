@@ -91,3 +91,5 @@ gem "rails-controller-testing"
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
 gem "pry-byebug"
+
+gem 'simplecov', require: false, group: :test
