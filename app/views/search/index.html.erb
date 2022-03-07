@@ -10,12 +10,13 @@
 <br>
 <% unless @usernames.blank? %>
   <h3> By UserName </h3>
-
   <% @usernames.each do |u| %>
-    <%= link_to (image_tag u.avatar_url, :id => "avatar-profile-small"), user_path(u) %>
-    <%= link_to "#{u.username}", user_path(u) %><br>
+    <div class="flex">
+      <%= link_to (image_tag u.avatar_url, class: "h-12 w-12 rounded-full"), user_path(u) %>
+      <br><br><br>
+      <h3 class="mx-2"><%= link_to "#{u.username}", user_path(u) %></h3>
+    </div>
   <% end %>
-
   <br>
   <hr>
 <% end %>
@@ -25,8 +26,11 @@
   <h3> By Name </h3>
 
   <% @names.each do |u| %>
-    <%= link_to (image_tag u.avatar_url, :id => "avatar-profile-small"), user_path(u) %>
-    <%= link_to "#{u.name}", user_path(u) %><br>
+    <div class="flex">
+      <%= link_to (image_tag u.avatar_url, class: "h-12 w-12 rounded-full"), user_path(u) %>
+      <br><br><br>
+      <h3 class="mx-2"><%= link_to "#{u.name}", user_path(u) %><br></h3>
+    </div>
   <% end %>
   <br>
   <hr>
@@ -37,8 +41,11 @@
   <h3> By email </h3>
 
   <% @emails.each do |u| %>
-    <%= link_to (image_tag u.avatar_url, :id => "avatar-profile-small"), user_path(u) %>
-    <%= link_to "#{u.email}", user_path(u) %><br>
+    <div class="flex">
+      <%= link_to (image_tag u.avatar_url, class: "h-12 w-12 rounded-full"), user_path(u) %>
+      <br><br><br>
+      <h3 class="mx-2"><%= link_to "#{u.email}", user_path(u) %><br></h3>
+    </div>
   <% end %>
   <br>
   <hr>
