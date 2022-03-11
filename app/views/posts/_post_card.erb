@@ -1,13 +1,11 @@
 <div class="m-2">
-  <div class="grid grid-cols-3">
+  <div class="flex justify-between items-center">
     <div class="flex">
       <%= image_tag post.user.avatar_url, class: "h-12 w-12 rounded-full" %>
       <h3 class="mx-2"><%= link_to "#{post.user.username}", user_path(post.user) %></h3>
     </div>
-    <div class="col-span-2 relative flex">
-      <div class="absolute bottom-0 right-0 mr-2">
-        <span><%= post.created_at.strftime("Created: #{post.created_at.day.ordinalize} %B %Y") %></span>
-      </div>
+    <div class="text-sm">
+      <span><%= post.created_at.strftime("Created: #{post.created_at.day.ordinalize} %B %Y") %></span>
     </div>
   </div>
   <%= link_to (image_tag post.image_url, :id => 'square-post-medium'), user_post_path(post.user_id, post) %>
